@@ -1,0 +1,38 @@
+# ===== C / C++ 编译产物 =====
+*.exe
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.dll
+*.lib
+*.ilk
+*.pdb
+*.idb
+*.exp
+
+# ===== Dev-C++ / Code::Blocks =====
+*.layout
+*.depend
+*.cbp
+*.dsp
+*.dsw
+
+# ===== Keil / MDK =====
+*.uvguix.*
+*.uvoptx
+*.uvprojx
+Objects/
+Listings/
+DebugConfig/
+
+# ===== VS Code =====
+.vscode/
+
+# ===== 系统 / 临时文件 =====
+Thumbs.db
+desktop.ini
+*.tmp
+*~
+*.bak
