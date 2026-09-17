@@ -1,39 +1,41 @@
 # code — 练习代码
 
-按章节建立文件夹，存放每天的练习代码。
+按**周**建立文件夹，存放每天的练习代码。
 
 ```
 code/
-├── ch01-环境与第一个程序/
-├── ch02-数据类型/
-├── ch03-运算符/
-├── ch04-分支/
-├── ch05-循环/
-├── ch06-函数/
-├── ch07-数组/
-├── ch08-字符串/
-├── ch10-指针/
-├── ch11-结构体/
-├── ch12-内存管理/
-├── ch13-位运算/
-├── ch14-预处理/
-└── ch15-文件操作/
+├── week01-hello-world/       # 第1周：环境 + Hello World
+├── week02-data-types/        # 第2周：数据类型
+├── week03-operators/         # 第3周：运算符
+├── week04-if-switch/         # 第4周：分支
+├── week05-loops/             # 第5周：循环
+├── week06-functions/         # 第6周：函数
+├── week07-arrays/            # 第7周：数组
+├── week08-strings/           # 第8周：字符串
+├── week09-pointers/          # 第9-10周：指针
+├── week10-struct-union/      # 第11周：结构体
+├── week11-memory/            # 第12周：内存管理
+└── week12-bit-operations/    # 第13周：位运算
 ```
+
+> ⚠️ **重要：文件夹和文件名必须用英文或拼音，不能用中文。**
+> MSYS2 的 gcc 在 Windows 上处理中文路径会报错（`ld.exe: cannot open output file`）。
+> 这是实测踩过的坑（`ch01-环境与第一个程序/` 编译失败）。
 
 ## 命名规范
 
-用**英文或拼音**命名（避免中文文件名导致 gcc 编译报错），例如：
+文件用英文或拼音命名，例如：
 
 ```
-ch02-01-sum-two-numbers.c
-ch05-01-nine-nine-table.c
+week02-sum-two-numbers.c
+week05-nine-nine-table.c
 ```
 
 ## 编译运行
 
 ```bash
 # 编译
-gcc ch02-01-sum-two-numbers.c -o test
+gcc helloworld.c -o test
 
 # 运行（Windows）
 ./test.exe
