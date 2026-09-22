@@ -15,7 +15,9 @@ int main(){
     
 
     // printf("100\n");      // 直接输出字符串"100"
-    // printf("%d\n",100);    // 使用%d格式化输出整数100
+    char a = 'A';              // 定义字符变量a并初始化为'A'
+    printf("%c\n",a);    // 使用%c格式化输出字符'A'
+    printf("%d\n",a);    // 使用%d格式化输出字符'A'对应的ASCII码值（65）
     // printf("%f\n",100.0);  // 使用%f格式化输出浮点数100.0
     // printf("%c\n",'a');    // 使用%c格式化输出字符'a'
     // int a=15;                 // 定义整数变量a并初始化为15
@@ -34,6 +36,6 @@ int main(){
     printf("%s\n", arr2);
 
     printf("are  u ok ?？？");
-
+    printf("C\\Users");
     return 0;              // 返回0，表示程序正常结束
 }
