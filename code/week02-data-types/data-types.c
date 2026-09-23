@@ -35,7 +35,7 @@ int main(){
     printf("%s\n", arr1);
     printf("%s\n", arr2);
 
-    printf("are  u ok ?？？");
+    printf("are  u ok ?？？\n");
     printf("C\\Users");
     return 0;              // 返回0，表示程序正常结束
 }
