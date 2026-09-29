@@ -1,5 +1,6 @@
 #include <stdio.h>   // 包含标准输入输出库，提供printf等函数
 #include <stdlib.h>  // 提供system函数
+#include <string.h>  // 提供strlen函数
 /* std==standard标准
 i==input输入
 o==output输出 */
@@ -12,7 +13,9 @@ int main(){
     //%s:字符串格式化输出
     //%p:指针格式化输出
     //%u:无符号整数格式化输出
-    
+
+    printf("hello\tworld\n");
+    printf("a\\b"); 
 
     // printf("100\n");      // 直接输出字符串"100"
     char a = 'A';              // 定义字符变量a并初始化为'A'
@@ -24,11 +27,11 @@ int main(){
     // scanf("%d",&a);        // 从键盘读取整数输入并存储到变量a中（%d=整数格式，&a=取变量a的地址）
     // printf("%d\n",a);      // 输出读入的整数
 
-/*     int i =0;              // 定义循环变量i并初始化为0
+    int i =0;              // 定义循环变量i并初始化为0
     for(i=32;i<=107;i++){  // for循环：从i=32开始，到i=107结束，每次i增加1
         printf("%c ",i);   // 将整数i作为ASCII码，输出对应的字符（%c=字符格式）
     }
-     */
+    printf("\n");            // 输出换行符，换行
     char arr1[] = "abc";
     char arr2[] = {'a','b','c'};
 
@@ -36,6 +39,13 @@ int main(){
     printf("%s\n", arr2);
 
     printf("are  u ok ?？？\n");
-    printf("C\\Users");
+    printf("C\\Users\\username\\Documents\n");
+    printf("He said:\"Hi\\tthere!\"\n");
+    int len =strlen(arr2);
+    printf("len = %d\n",len);
+    int b = 100;
+    int adg = 200;
+    printf("adg - b = %d\n",adg-b);
+
     return 0;              // 返回0，表示程序正常结束
 }
