@@ -4,10 +4,10 @@
 /* ============================================================
  * 输入输出考题程序（第 2 周 · 选集 25-28 配套）
  *
- * 用法：运行 → 依次答 5 道题 → 全部答完后自动把答案
+ * 用法：运行 → 依次答 6 道题 → 全部答完后自动把答案
  *       保存到同目录的 io-quiz-answers.txt 文件里
  *
- * 考点：printf/scanf、ASCII、sizeof、转义字符（全是已学内容）
+ * 考点：printf/scanf、ASCII、sizeof、转义字符、fgets 中文输入
  *
  * ⚠️ 超前知识：本程序用了文件操作（fopen/fprintf/fclose），
  *    这是选集 172+ 的内容，现在只要会套用即可，注释已标原理
@@ -18,9 +18,12 @@ int main(void) {
 
     /* ---- 答案变量：每个题一个 int，答完统一写进文件 ---- */
     int a1, a2, a3, a4, a5;
+    /* 中文简答题的答案：用字符数组装（英文术语: character array）
+     * 开 100 字节 = 最多约 33 个汉字（UTF-8 下 1 汉字 ≈ 3 字节） + '\0' */
+    char answer_zh[100];
 
-    printf("========== 输入输出考题（共5题）==========\n");
-    printf("提示：选择题输入序号，填空题输入数字，回车提交\n\n");
+    printf("========== 输入输出考题（共6题）==========\n");
+    printf("提示：选择题输入序号，填空题输入数字，简答题输入文字，回车提交\n\n");
 
     /* 第 1 题：格式符（考点：printf 的 format string） */
     printf("Q1. 想打印一个整数，应该用哪个格式符？\n");
@@ -48,6 +51,24 @@ int main(void) {
     printf("你的答案: ");
     scanf("%d", &a5);
 
+    /* 第 6 题：中文简答题（考点：文本输入）
+     * ⚠️ scanf 的 %s 遇到空格就停，且超长会溢出，所以这里用 fgets：
+     *   fgets(数组, 最大字节数, stdin) —— 安全版输入，最多读 99 字节自动截断
+     *   第三个参数 stdin = 标准输入（英文术语: stdin, standard input），即键盘
+     * ⚠️ 前面 5 次 scanf("%d") 会把回车 '\n' 留在输入缓冲区，
+     *    不清理的话 fgets 会立刻读到一个空行 → 先用 getchar() 把残留回车吃掉
+     *    （getchar = get character，读走缓冲区里的 1 个字符） */
+    printf("\nQ6.【简答】用一句话说明：字符串 \"abc\" 为什么要多占 1 个字节？\n");
+    printf("你的答案（可含空格，回车提交）: ");
+    while (getchar() != '\n');   // 清掉上次 scanf 残留的回车（循环读到换行为止）
+    fgets(answer_zh, sizeof(answer_zh), stdin);   // sizeof(数组)=总字节数，安全上限
+    /* fgets 会把末尾的回车也存进去，去掉它：数到字符串末尾，是 '\n' 就抹掉 */
+    int len = 0;
+    while (answer_zh[len] != '\0') len++;         // 手动数到末尾（strlen 的底层原理就这么简单）
+    if (len > 0 && answer_zh[len - 1] == '\n') {
+        answer_zh[len - 1] = '\0';                // 用结束符覆盖回车（英文术语: null terminator）
+    }
+
     /* ================= 答案保存到文件 =================
      * 文件操作三步曲（选集 172 会细讲，先当模板记住）：
      *   fopen  → 打开/创建文件，返回文件指针（英文术语: file pointer）
@@ -69,6 +90,7 @@ int main(void) {
     fprintf(fp, "Q3. sizeof(int)    你的答案: %d   正确: 4\n",        a3);
     fprintf(fp, "Q4. \"abc\"占几字节  你的答案: %d   正确: 4\n",        a4);
     fprintf(fp, "Q5. \\n的ASCII值    你的答案: %d   正确: 10\n",        a5);
+    fprintf(fp, "Q6. 中文简答       你的答案: %s\n",                answer_zh);
 
     fclose(fp);                 // 忘记 fclose → 数据可能还留在缓冲区没写进磁盘
 
