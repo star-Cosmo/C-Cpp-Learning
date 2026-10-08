@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <time.h>       /* 时间函数：time/localtime/strftime（超前知识，注释已标原理） */
 
 /* ============================================================
  * 输入输出考题程序（第 2 周 · 选集 25-28 配套）
  *
  * 用法：运行 → 依次答 6 道题 → 全部答完后自动把答案
- *       保存到同目录的 io-quiz-answers.txt 文件里
+ *       保存到同目录的 io-quiz-answers-日期-时间.txt 文件里
+ *       （文件名带时间戳，每次答题独立留档，不会互相覆盖）
  *
  * 考点：printf/scanf、ASCII、sizeof、转义字符、fgets 中文输入
  *       + 输入校验（英文术语: input validation，防御式编程 defensive programming）
@@ -199,7 +201,25 @@ int main(void) {
      *           只是 printf 打到屏幕，fprintf 打到文件
      *   fclose → 关闭文件，把缓冲区剩余数据真正写入磁盘
      * =================================================== */
-    FILE *fp = fopen("io-quiz-answers.txt", "w");   // 在程序所在目录创建答案文件
+    /* ================= 生成带时间戳的文件名 =================
+     * （英文术语: timestamp 时间戳）
+     *   time()      → 取当前时刻（1970-01-01 至今的秒数，英文术语: Unix epoch）
+     *   localtime() → 把秒数翻译成"年月日时分秒"结构体（英文术语: struct tm）
+     *   strftime()  → 按格式串把时间写成文字：
+     *                 %Y=年 %m=月 %d=日 %H=时 %M=分 %S=秒
+     *   效果：io-quiz-answers-20261008-143055.txt
+     *   每次答题独立留档，跑多少次都不会互相覆盖
+     * ====================================================== */
+    char filename[64];
+    time_t now = time(NULL);
+    struct tm *tm_local = localtime(&now);
+    if (tm_local == NULL ||
+        strftime(filename, sizeof(filename),
+                "io-quiz-answers-%Y%m%d-%H%M%S.txt", tm_local) == 0) {
+        strcpy(filename, "io-quiz-answers.txt");  /* 极端情况取时间失败，退回默认名兜底 */
+    }
+
+    FILE *fp = fopen(filename, "w");   // 用时间戳文件名创建答案文件
 
     if (fp == NULL) {           // 判空是文件操作的铁律：打不开（没权限/磁盘满）必须先报告
         printf("\n错误：答案文件创建失败！\n");
@@ -223,7 +243,7 @@ int main(void) {
     fclose(fp);                 // 忘记 fclose → 数据可能还留在缓冲区没写进磁盘
 
     printf("\n========== 答题结束 ==========\n");
-    printf("你的答案已保存到: io-quiz-answers.txt\n");
+    printf("你的答案已保存到: %s\n", filename);
     printf("（Q1~Q5 对一下文件里的正确答案；Q6 主观题原文保留，交给我审查）\n");
 
     return 0;   // 0 = 正常结束
