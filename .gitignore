@@ -40,3 +40,9 @@ desktop.ini
 *~
 *.bak
 .omo/
+
+# ===== Codegraph 索引 =====
+.codegraph/
+
+# ===== MkDocs 网站构建产物 =====
+site/

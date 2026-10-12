@@ -1,0 +1,83 @@
+﻿site_name: C/C++ 学习笔记
+site_description: 从零开始，系统学习 C 语言 → MCU / 嵌入式开发
+site_url: https://star-cosmo.github.io/C-Cpp-Learning/
+repo_url: https://github.com/star-Cosmo/C-Cpp-Learning
+repo_name: star-Cosmo/C-Cpp-Learning
+edit_uri: edit/main/
+
+docs_dir: ..
+site_dir: ../../.site-build
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+exclude_docs: |
+  .git/
+  .github/
+  .mkdocs/
+  .codegraph/
+  .omo/
+  .vscode/
+  .gitignore
+  *.exe
+
+nav:
+  - 首页: README.md
+  - 学习路线:
+      - 学习路线与B站资源: docs/01-学习路线与B站资源.md
+      - 第2周数据类型: docs/02-第2周数据类型.md
+  - 学习笔记:
+      - 笔记索引: notes/README.md
+      - week01 环境搭建: notes/week01-环境搭建.md
+      - week02 数据类型与IO: notes/week02-数据类型与IO.md
+      - week03 scanf: notes/week03-scanf.md
+      - 面试冲刺-3个月计划: notes/面试冲刺-3个月计划.md
+      - 项目追问树-01-数字变焦: notes/项目追问树-01-数字变焦.md
+  - 代码:
+      - 代码索引: code/README.md
+      - week02 数据类型: code/week02-data-types/README.md
+  - 项目: projects/README.md
