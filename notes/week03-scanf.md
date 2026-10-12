@@ -114,6 +114,27 @@ wprintf(L"你输入的是: %ls\n", str);
 
 > 💡 两行设置缺一不可：`setlocale` 管"程序认不认宽字符"，`SetConsoleOutputCP` 管"控制台怎么显示"。
 
+### 窄 vs 宽：格式符必须配对
+
+| 类型 | 输入 / 输出函数 | 格式符 |
+|---|---|---|
+| 窄 `char` / `char[]` | `printf` / `scanf` | `%c` / `%s` |
+| 宽 `wchar_t` / `wchar_t[]` | `wprintf` / `wscanf` | `%lc` / `%ls` |
+
+- ⚠️ 混用会错：`printf("%s", 宽字符数组)` ❌ → 要用 `wprintf(L"%ls", 宽字符数组)`
+- 一句话记：**窄的配 `%s`，宽的配 `%ls`**（`%c` / `%lc` 同理）
+
+### 宽字符家族（`w` / `wcs` 前缀）
+
+| 窄版 | 宽版 | 说明 |
+|---|---|---|
+| `printf` / `scanf` | `wprintf` / `wscanf` | 宽字符版输入输出 |
+| `strlen` | `wcslen` | 宽字符串长度 |
+| `strcpy` | `wcscpy` | 宽字符串复制 |
+| `"abc"` | `L"abc"` | 宽字符串字面量 |
+
+> 规律：字符串函数的宽字符版，通常**换成 `wcs` 前缀**（配 `<wchar.h>`）。
+
 ## 配套实验
 
 - `scanf-use.c` —— 逗号分隔 scanf + 日期解析（`%*c` 万能分隔符）+ 5 种输入方式 + 格式符指南 + 读中文三版试错
