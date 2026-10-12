@@ -31,12 +31,12 @@ int main(void) {
     wprintf(L"你输入的是: %ls\n", str); */
     // 改进：使用数组可以存储一串字符，支持中英文、数字、符号混合输入
 
-
+/* 
     int a;
     int b;
     printf("请输入两个整数: ");
     scanf("%d,%d", &a, &b);  // 使用%d读取整数，用逗号分隔输入
-    printf("你输入的两个整数是: %d 和 %d\n", a, b);
+    printf("你输入的两个整数是: %d 和 %d\n", a, b); */
 
 
     /* ===== 方法2：fgets() - 最安全的字符串输入【推荐】 ===== */
@@ -100,7 +100,7 @@ int main(void) {
     printf("[%%c] 我的等级是: %c\n", grade);
 
     // 4. %s - 字符串
-    char name[] = "张三";
+    wchar_t name[] = L"张三";
     printf("[%%s] 我的名字是: %s\n", name);
 
     // 5. %x 或 %X - 十六进制整数
@@ -132,7 +132,20 @@ int main(void) {
     unsigned long long hugeNumber = 999999999999ULL;
     printf("[%%llu] 超大数字: %llu\n", hugeNumber);
     */
+/*     int year;
+    int month;
+    int day;
+    printf("请输入日期（格式：YYYY-MM-DD）: ");
+    scanf("%d-%d-%d", &year, &month, &day);
+    printf("你输入的日期是: %04d-%02d-%02d\n", year, month, day); */
 
+
+    int year1;
+    int month1;
+    int day1;
+    printf("请输入日期（格式：YYYY/MM/DD）: ");
+    scanf("%d%*c%d%*c%d", &year1, &month1, &day1);
+    printf("你输入的日期是: %d %d %d\n", year1, month1, day1);
 
     return 0;
 }
